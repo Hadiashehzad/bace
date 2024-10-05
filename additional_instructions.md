@@ -11,7 +11,7 @@ This document contains three "pages":
 - "Creating a MongoDB  Atlas Database" describes how to set up a MongoDB Atlas database and lists what information should be stored to connect with your database in the app.
 - "Deployment Options" describes the main ways the app can be deployed in it's current format.
 It will also instruct users on what files need to be changed in order to deploy the application elsewhere and provide resources for further research.
-- "Flask/MongoDB Deployment" describes the process of deploying the application as a typical Flask app on PythonAnywhere that is connected to a MongoDB database.
+- "Alternative Deployment Framework Walkthrough: PythonAnywhere/MongoDB" describes the process of deploying the application as a typical Flask app on PythonAnywhere that is connected to a MongoDB database.
 It's infeasible/out of scope to walk through all different deployment options, but this example should provide users with a helpful example of what it looks like to deploy BACE outside of the AWS ecosystem.
 
 # Configure Database (Optional)
