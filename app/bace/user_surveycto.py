@@ -1,19 +1,29 @@
 # Survey CTO Integration Functions
 
-def convert_design_surveycto(design, profile, request_data, split_to_rows="|", split_to_vars=":"):
+# Default values for separators used in converting design configurations for SurveyCTO.
+# These defaults are used in the convert_design_surveycto function below and should match
+# the separators passed to the BACE field plug-in. 
+# Make sure you pass the correct parameters to the field plug-in if you modify these.
+
+default_split_to_rows = "|"
+default_split_to_vars = ":"
+
+def convert_design_surveycto(design, profile, request_data, split_to_rows=default_split_to_rows, split_to_vars=default_split_to_vars):
     # Function to convert design for SurveyCTO route.
     # Output produces a single string that captures the design.
-    # Rows are separated by split_to_rows (default = "|")
-    # Values within rows are separated by split_to_vars (default = ":")
+    # Rows are separated by split_to_rows (default = default_split_to_rows)
+    # Values within rows are separated by split_to_vars (default = default_split_to_vars)
     # E.g. output = "color:blue:black|type:gel:fountain" maps to a table in SurveyCTO of:
     #
     #       color   | blue  | black
     #       type    | gel   | fountain
     #
-    # See BACE SurveyCTO plug-in and BACE Manual for more details.
+    # This format is critical for compatibility with the BACE SurveyCTO plug-in.
+    # See BACE Manual for more details.
 
     output = ""
     vars = ['price', 'color', 'type']
+    rows = []
 
     for var in vars:
         if var == 'price':
@@ -22,7 +32,9 @@ def convert_design_surveycto(design, profile, request_data, split_to_rows="|", s
         else:
             row = f"{var}{split_to_vars}{design.get(f'{var}_a')}{split_to_vars}{design.get(f'{var}_b')}"
 
-        output += row + split_to_rows
+        rows.append(row)
+
+    output = split_to_rows.join(rows)
 
     print(output)
 
