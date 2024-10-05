@@ -24,8 +24,11 @@ from utils.flask_lambda.flask_lambda import FlaskLambda
 from utils.app_utils import format_response, get_request, is_empty
 
 # Specify application. Change if deploying via Lambda or directly as a Flask application.
-app = FlaskLambda(__name__)     # Uncomment if deploying via AWS Lambda.
-# app = Flask(__name__)          # Uncomment if deploying directly as standard Flask application.
+host_on_lambda = True
+if host_on_lambda:
+    app = FlaskLambda(__name__)     # Deploy via AWS Lambda.
+else:
+    app = Flask(__name__)          # Deploying directly as standard Flask application.
 
 @app.errorhandler(HTTPException)
 def handle_exception(e):
@@ -328,13 +331,11 @@ def surveyCTO():
 
         # Try to retrieve the item from the database
         key = {'profile_id': profile_id}
-        response = table.get_item(Key=key)
+        profile = find_item(table, key, db_type)
 
-        if 'Item' in response:
+        if profile:
 
             # Profile exists, process accordingly
-            profile = decimal_to_float(response['Item'])
-
             # Check if answer is in answers
             answer = request_data.get('answer')
             answers_as_string = [str(a) for a in answers]
@@ -367,7 +368,8 @@ def surveyCTO():
                     }
 
                     # Push changes to database
-                    update_db_item(table, key, updates)
+                    update_item(table, key, updates, db_type)
+
                     next_design = convert_design_surveycto(next_design, profile, profile)
                     print('Received request for profile with no design history. Sending new design.')
 
@@ -402,7 +404,7 @@ def surveyCTO():
                     }
 
                     # Push changes to database
-                    update_db_item(table, key, updates)
+                    update_item(table, key, updates, db_type)
 
                     # Convert estimates
                     formatted_estimates = convert_dict_to_string(estimates)
@@ -425,7 +427,7 @@ def surveyCTO():
                     }
 
                     # Push changes to database
-                    update_db_item(table, key, updates)
+                    update_item(table, key, updates, db_type)
 
                     next_design = convert_design_surveycto(next_design, profile, request_data)
                     return format_response(next_design, allow_CORS=True)
@@ -448,8 +450,9 @@ def surveyCTO():
             profile['design_history'] = [next_design]
             profile['answer_history'] = []
 
-            # Put item into database
-            table.put_item(Item=float_to_decimal(profile))
+            # Create profile in database
+            create_item(table, profile, db_type)
+
             next_design = convert_design_surveycto(next_design, profile, profile)
 
             print(f'Successfully created profile for {profile.get("survey_id") or profile.get("profile_id")}')
