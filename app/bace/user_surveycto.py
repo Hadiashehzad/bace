@@ -40,7 +40,7 @@ def convert_design_surveycto(design, profile, request_data, split_to_rows=defaul
 
     return {'output': output}
 
-def convert_dict_to_string(obj, parent_key='', split_to_rows='|', split_to_vars=':'):
+def convert_dict_to_string(obj, parent_key='', split_to_rows=default_split_to_rows, split_to_vars=default_split_to_vars):
     # Function to convert a nested dictionary into a string formatted to integrate with SurveyCTO
     output = []
 

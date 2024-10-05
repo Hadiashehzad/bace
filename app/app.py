@@ -12,7 +12,7 @@ from database.db import table, db_type, create_item, update_item, find_item
 from bace.design_optimization import get_design_tuner, get_next_design, get_conf_dict, get_objective, context
 from bace.pmc_inference import pmc, sample_thetas
 from bace.user_config import answers, design_params, theta_params, likelihood_pdf, author, size_thetas, conf_dict, max_opt_time
-from bace.user_convert import add_to_profile, convert_design, convert_design_surveycto, convert_dict_to_string
+from bace.user_convert import add_to_profile, convert_design
 from bace.user_survey import nquestions, display_estimates
 from bace.user_surveycto import convert_design_surveycto, convert_dict_to_string
 from static.style import css_style
