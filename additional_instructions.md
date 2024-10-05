@@ -326,7 +326,7 @@ This is a useful option for setting credentials that can be referenced as enviro
 - Run commands to add credentials to your .env
   - Open Bash
   - CD into directory `cd ~/bace`
-  - Run `echo “export MONGO_PASSWORD=<your-password>” >> .env” for MONGO_USERNAME, MONGO_PASSWORD, and MONGO_CLUSTER, specifying your credentials.
+  - Run `echo “export MONGO_PASSWORD=<your-password>” >> .env` for MONGO_USERNAME, MONGO_PASSWORD, and MONGO_CLUSTER, specifying your credentials.
 
 - Find and open the WSGI configuration file
 - Add the following to the top of the file:
