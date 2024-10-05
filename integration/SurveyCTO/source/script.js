@@ -104,11 +104,16 @@ function addAnswerButtons(n_options = n_options_default, buttons_per_row = butto
     }
   }
 
-function addResult(answer_index) {
-
+  function addResult(answer_index, split_to_rows_var = split_to_rows) {
     // Use result_dict to access results
     var result = result_dict['result'];
-    var answer_to_store = result + answer_index;
+    var answer_to_store;
+
+    if (result.endsWith(split_to_rows_var)) {
+        answer_to_store = result + answer_index;
+    } else {
+        answer_to_store = result + split_to_rows_var + answer_index;
+    }
 
     // Fix the button colors
     fixButtonColors(answer_index);
