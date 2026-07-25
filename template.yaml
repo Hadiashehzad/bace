@@ -16,11 +16,10 @@ Globals:
 Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
-    # Policies to help avoid accidental database deletion.
-    UpdateReplacePolicy: Retain #Retain table if table name is changed rather than delete. See https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html
-    DeletionPolicy: Retain # Retain table on sam delete. https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
     Properties:
-      TableName: bace-db # If changed, update `table_name` in app/database/db.py
+      TableName: bace-bureaucrats-db  # <--- CHANGED THIS LINE
       AttributeDefinitions:
         -
           AttributeName: profile_id
@@ -32,7 +31,7 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 24
         WriteCapacityUnits: 24
-
+        
   BaceFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
