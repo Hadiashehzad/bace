@@ -12,6 +12,7 @@ utility model, and identification work built on top of it for a specific
 applied research question.
 
 <img width="722" height="734" alt="reference" src="https://github.com/user-attachments/assets/b92c2345-795e-4b3d-b232-333bdb72029c" />
+
 An example screen of the Conjoint Survey Experiment
 
 
