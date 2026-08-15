@@ -11,7 +11,7 @@ The underlying adaptive-design engine is the authors', and this repo documents t
 utility model, and identification work built on top of it for a specific
 applied research question.
 
-<img width="1600" height="888" alt="reference" src="https://github.com/user-attachments/assets/4ffac93d-0606-402a-8a52-172ba30eca1a" />
+<img width="722" height="734" alt="reference" src="https://github.com/user-attachments/assets/b92c2345-795e-4b3d-b232-333bdb72029c" />
 An example screen of the Conjoint Survey Experiment
 
 
